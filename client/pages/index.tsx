@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import { useTypedSelector } from '../hooks/useTypedSelector'
 
 const Home: NextPage = () => {
-  const state = useTypedSelector(state => state.test)
   return (
-    <div>{state.test}</div>
+    <Head>
+        <title>Pomodoro Web</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head>
   )
 }
 

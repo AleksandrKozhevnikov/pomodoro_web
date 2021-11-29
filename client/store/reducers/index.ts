@@ -1,8 +1,12 @@
-import {combineReducers} from 'redux';
-import { TestReducer } from './testReducer';
+import {combineReducers} from "redux";
+import {serviceReducer} from './serviceReducer'
+import { userReducer } from "./userReducer";
+
 
 export const rootReducer = combineReducers({
-    test: TestReducer
+    service: serviceReducer,
+    user: userReducer
 })
+
 
 export type RootState = ReturnType<typeof rootReducer>

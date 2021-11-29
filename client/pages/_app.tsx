@@ -1,12 +1,17 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import React from 'react';
+import '../utils/globals.css'
+import {AppProps} from 'next/app';
+import { Header } from '../components/header/Header';
 import {Provider} from 'react-redux'
-import {store} from '../store'
+import {useStore} from '../store'
+
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const store = useStore(pageProps.initialReduxState)
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+        <Header/>
+        <Component {...pageProps} />
     </Provider>
   ) 
 }
