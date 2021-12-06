@@ -6,7 +6,11 @@ import { useActions } from "../../../hooks/useActions"
 
 export const ModalLayout: React.FC = ({children}) => {
     const router = useRouter()
-    const allHeight = window.innerHeight - 62
+    let allHeight: any = '900px'
+
+    if (typeof window !== 'undefined') {
+        allHeight = `${window.innerHeight}px`
+      }
 
     const unmountStyles = {opacity: '0', transition: '300ms ease'}
     const [style, setStyle] = useState({})
@@ -26,7 +30,7 @@ export const ModalLayout: React.FC = ({children}) => {
 
   
     return (
-        <ModalLayoutWrapper style={style} property={allHeight.toString()}>
+        <ModalLayoutWrapper style={style} property={allHeight}>
             {children}
         </ModalLayoutWrapper>
     )

@@ -24,7 +24,7 @@ export const userRegistration = (user: userRegDto) => {
                     .catch((res: string) => {
                         dispatch({type: UserActionTypes.USER_REGISTRATION_ERROR, payload: res})
                     })
-        } catch(e) {
+        } catch(e: any) {
             dispatch({type: UserActionTypes.USER_REGISTRATION_ERROR, payload: e})
         }
     }
