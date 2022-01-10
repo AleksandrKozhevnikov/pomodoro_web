@@ -1,5 +1,6 @@
 import React from 'react';
 import '../utils/globals.css'
+import '../components/registration/registrationModal/spinner.css'
 import {AppProps} from 'next/app';
 import { Header } from '../components/header/Header';
 import {Provider} from 'react-redux'

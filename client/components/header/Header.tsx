@@ -4,11 +4,13 @@ import Link from 'next/link'
 import { useActions } from "../../hooks/useActions"
 import { useRouter } from "next/dist/client/router"
 import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from "../../utils/routes"
+import { useTypedSelector } from "../../hooks/useTypedSelector"
 
 
 export const Header: React.FC = () => {
 
     const {closeModal} = useActions()
+    const {token} = useTypedSelector(state => state.user)
 
     const router = useRouter()
 

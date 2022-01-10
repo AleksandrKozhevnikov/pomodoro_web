@@ -23,4 +23,10 @@ export class AuthController {
     registration(@Body() userDto: CreateUserDto) {
         return this.authService.registration(userDto)
     }
+
+    @ApiOperation({summary: 'Проверка данных пользователя'})
+    @Post('/checkRegData')
+    checkEmail(@Body() regData: object) {
+        return this.authService.checkRegData(regData)
+    }
 }

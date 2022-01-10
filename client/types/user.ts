@@ -15,19 +15,34 @@ export interface UserState {
     userNick: string
     loading: boolean
     error: string
+    success: boolean
+    emailCheckLoading: boolean
+    emailCheckError: string
+    nicknameCheckLoading: boolean
+    nicknameCheckError: string
+    token: string
 }
 
 export enum UserActionTypes {
-    USER_REGISTRATION = 'USER_REGISTRATION',
     USER_REGISTRATION_LOADING = 'USER_REGISTRATION_LOADING',
     USER_REGISTRATION_ERROR = 'USER_REGISTRATION_ERROR',
     USER_REGISTRATION_SUCCESS = 'USER_REGISTRATION_SUCCESS',
-    USER_LOGIN = 'USER_LOGIN'
+
+    USER_LOGIN_LOADING = 'USER_LOGIN_LOADING',
+    USER_LOGIN_ERROR = 'USER_LOGIN_ERROR',
+    USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS',
+
+    USER_EMAIL_CHECK_LOADING = 'USER_EMAIL_CHECK_LOADING',
+    USER_EMAIL_CHECK_SUCCESS = 'USER_EMAIL_CHECK_SUCCESS',
+    USER_EMAIL_CHECK_ERROR = 'USER_EMAIL_CHECK_ERROR',
+
+    USER_NICKNAME_CHECK_LOADING = 'USER_NICKNAME_CHECK_LOADING',
+    USER_NICKNAME_CHECK_SUCCESS = 'USER_NICKNAME_CHECK_SUCCESS',
+    USER_NICKNAME_CHECK_ERROR = 'USER_NICKNAME_CHECK_ERROR',
+
+    RESET_AUTH_STATE = 'RESET_AUTH_STATE'
 }
 
-interface UserRegistrationAction {
-    type: UserActionTypes.USER_REGISTRATION
-}
 
 interface UserRegistrationLoadingAction {
     type: UserActionTypes.USER_REGISTRATION_LOADING
@@ -42,15 +57,75 @@ interface UserRegistrationSuccessAction {
     type: UserActionTypes.USER_REGISTRATION_SUCCESS
 }
 
-interface UserLoginAction {
-    type: UserActionTypes.USER_LOGIN
-    payload: userLogDto
+// login
+
+
+interface UserLoginLoadingAction {
+    type: UserActionTypes.USER_LOGIN_LOADING
+}
+
+interface UserLoginErrorAction {
+    type: UserActionTypes.USER_LOGIN_ERROR
+    payload: string
+}
+
+interface UserLoginSuccessAction {
+    type: UserActionTypes.USER_LOGIN_SUCCESS
+    payload: string
+}
+
+// emailCheck
+
+
+interface UserEmailCheckLoadingAction {
+    type: UserActionTypes.USER_EMAIL_CHECK_LOADING
+}
+
+interface UserEmailCheckSuccessAction {
+    type: UserActionTypes.USER_EMAIL_CHECK_SUCCESS
+}
+
+interface UserEmailCheckErrorAction {
+    type: UserActionTypes.USER_EMAIL_CHECK_ERROR
+    payload: string
+}
+
+// nicknameCheck
+
+
+interface UserNicknameCheckLoadingAction {
+    type: UserActionTypes.USER_NICKNAME_CHECK_LOADING
+}
+
+interface UserNicknameCheckSuccessAction {
+    type: UserActionTypes.USER_NICKNAME_CHECK_SUCCESS
+}
+
+interface UserNicknameCheckErrorAction {
+    type: UserActionTypes.USER_NICKNAME_CHECK_ERROR
+    payload: string
+}
+
+// reset
+
+interface UserResetStateAction {
+    type: UserActionTypes.RESET_AUTH_STATE
 }
 
 
+
 export type UserAction = 
-    UserRegistrationAction | 
     UserRegistrationLoadingAction | 
     UserRegistrationErrorAction |
     UserRegistrationSuccessAction | 
-    UserLoginAction
+    UserLoginLoadingAction |
+    UserLoginErrorAction |
+    UserLoginSuccessAction |
+    UserEmailCheckLoadingAction |
+    UserEmailCheckSuccessAction |
+    UserEmailCheckErrorAction |
+    UserNicknameCheckLoadingAction |
+    UserNicknameCheckErrorAction |
+    UserNicknameCheckSuccessAction |
+    UserResetStateAction 
+    

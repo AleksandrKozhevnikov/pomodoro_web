@@ -1,5 +1,5 @@
 import { ModalLayout } from "../../components/layouts/ModalLayout/ModalLayout"
-import { RegistrationModal } from "../../components/registration/RegistrationModal"
+import { RegistrationModal } from "../../components/registration/registrationModal/RegistrationModal"
 import Head from 'next/head'
 
 const Index: React.FC = () => {

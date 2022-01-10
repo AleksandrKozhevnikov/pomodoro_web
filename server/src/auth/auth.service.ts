@@ -32,6 +32,27 @@ export class AuthService {
         return this.generateToken(user)
     }
 
+
+    async checkRegData(regData: any) {
+        if(regData.email) {
+            const candidateEmail = await this.userService.getUserByEmail(regData.email)
+            if(candidateEmail) {
+                throw new HttpException('Пользователь с таким email уже существует', HttpStatus.BAD_REQUEST)
+            }
+    
+            return true
+        }
+
+        if(regData.nickname) {
+            const candidateNickName = await this.userService.getUserByNickName(regData.nickname)
+            if(candidateNickName) {
+                throw new HttpException('Пользователь с таким ником уже существует', HttpStatus.BAD_REQUEST)
+            }
+            return true
+        }
+    }
+
+
     private async generateToken(user: User) {
         const payload = {id: user.id, email: user.email, nickName: user.nickName}
         return {

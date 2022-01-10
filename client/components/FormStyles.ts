@@ -100,6 +100,20 @@ export const Input = styled.input`
     }
 `
 
+export const InputWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    position: relative;
+`
+
+export const SpinnerWrapper = styled.div`
+    transition: 300ms all;
+    position: absolute;
+    right: -40px;
+    animation: 500ms ${keyframes`${fadeIn}`} both;
+`
+
+
 export const InputWarningMessage = styled.p`
     color: ${WARNING_COLOR};
     animation: 500ms ${keyframes`${fadeIn} infinite`};
@@ -108,9 +122,22 @@ export const InputWarningMessage = styled.p`
     margin-left: 10px
 `
 
+export const RegistrationWarningMessage = styled.p`
+    color: ${WARNING_COLOR};
+    animation: 500ms ${keyframes`${fadeIn} infinite`};
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 4.5rem;
+`
+
 export const InputSuccessMessage = styled.div`
     animation: 500ms ${keyframes`${fadeIn} infinite`};
     margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 400;
 `
 
 export const FormButton = styled.button`
@@ -130,5 +157,12 @@ export const FormButton = styled.button`
     font-size: 0.8rem;
     :hover {
         box-shadow: 0px -6px 12px -1px ${THIRD_COLOR_SMOOTH};
+    }
+    :disabled {
+        background-color: ${MAIN_COLOR};
+        cursor: not-allowed;
+        :hover {
+            box-shadow: 0px -6px 12px -1px ${MAIN_COLOR};
+        }
     }
 `
