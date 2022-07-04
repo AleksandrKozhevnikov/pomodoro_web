@@ -1,6 +1,8 @@
-import { Body, Controller, Post, UsePipes } from '@nestjs/common';
+import { Body, Controller, Post, UsePipes, UseGuards, Get} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import {LoginUserDto} from 'src/users/dto/login-user.dto'
+import { JwtAuthGuard } from 'src/auth/jwt-auth.quard';
 import { ApiOperation } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import {ValidationPipe} from '../pipes/validation.pipes'
@@ -12,8 +14,9 @@ export class AuthController {
     constructor(private authService: AuthService) {}
 
     @ApiOperation({summary: 'Вход'})
+    @UsePipes(ValidationPipe)
     @Post('/login')
-    login(@Body() userDto: CreateUserDto) {
+    login(@Body() userDto: LoginUserDto) {
         return this.authService.login(userDto)
     }
 
@@ -28,5 +31,12 @@ export class AuthController {
     @Post('/checkRegData')
     checkEmail(@Body() regData: object) {
         return this.authService.checkRegData(regData)
+    }
+
+    @ApiOperation({summary: 'Проверка валидности токена'})
+    @Get('/checkToken')
+    @UseGuards(JwtAuthGuard)
+    checkTokenValid() {
+        return 'checKToken'
     }
 }

@@ -9,6 +9,7 @@ export const ModalWrapper = styled.div`
     background-color: ${WHITE_COLOR};
     width: 28rem;
     height: max-content;
+    border-radius: 8px;
 `
 
 export const ModalHeader = styled.div`
@@ -18,6 +19,8 @@ export const ModalHeader = styled.div`
     height: 2.6rem;
     background-color: ${MAIN_COLOR};
     width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 `
 export const CloseButton = styled.button`
     width: 5.5rem;
@@ -31,6 +34,7 @@ export const CloseButton = styled.button`
     border: none;
     font-weight: 300;
     font-size: 0.8rem;
+    border-top-right-radius: 8px;
     :hover {
         background-color: ${MAIN_COLOR};
         color: ${SECOND_COLOR}
@@ -155,8 +159,10 @@ export const FormButton = styled.button`
     outline: none;
     font-weight: 600;
     font-size: 0.8rem;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
     :hover {
-        box-shadow: 0px -6px 12px -1px ${THIRD_COLOR_SMOOTH};
+        box-shadow: 0px -6px 12px -1px ${THIRD_COLOR};
     }
     :disabled {
         background-color: ${MAIN_COLOR};

@@ -33,6 +33,30 @@ export class UsersService {
         return user
     }
 
+    async changeVisibility(id: number) {
+        const userVisibility = await this.userRepository.findOne({where: {id}})
+        const user = await this.userRepository.update({open: !userVisibility.open}, {where: {id}})
+        return userVisibility
+    }
+
+    async changeTotalStarts(id: number) {
+        const userTotalStarts = await this.userRepository.findOne({where: {id}})
+        const user = await this.userRepository.update({totalStarts: userTotalStarts.totalStarts + 1}, {where: {id}})
+        return userTotalStarts
+    }
+
+    async changeTotalConcentration(id: number, concentrationMinutes: number) {
+        const userTotalConcentration = await this.userRepository.findOne({where: {id}})
+        const user = await this.userRepository.update({totalConcentration: userTotalConcentration.totalConcentration + concentrationMinutes}, {where: {id}})
+        return userTotalConcentration
+    }
+
+    async changeDayConcentration(id: number, concentrationDayAndMinutes: string) {
+        const userDayConcentration = await this.userRepository.findOne({where: {id}})
+        const user = await this.userRepository.update({dayConcentration: userDayConcentration.dayConcentration + concentrationDayAndMinutes}, {where: {id}})
+        return userDayConcentration
+    }
+
     async changeTotalPoints(id: number, points: number) {
         const user = await this.userRepository.findOne({where: {id}})
         const userTotalPointsBefore = user.totalPoints

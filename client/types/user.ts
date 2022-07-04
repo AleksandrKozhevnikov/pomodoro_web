@@ -1,13 +1,27 @@
-export interface userRegDto {
+
+
+export interface UserRegDto {
     email: string,
     password: string,
     nickName: string
 }
 
-export interface userLogDto {
+export interface UserLogDto {
     email: string,
     password: string
 }
+
+export interface UserData {
+    id: number,
+    email: string,
+    nickname: string,
+    banned: boolean,
+    banReason: string | null,
+    open: boolean,
+    level: number,
+    totalPoints: number
+}
+
 
 export interface UserState {
     isLogin: boolean
@@ -20,7 +34,7 @@ export interface UserState {
     emailCheckError: string
     nicknameCheckLoading: boolean
     nicknameCheckError: string
-    token: string
+    userData: UserData
 }
 
 export enum UserActionTypes {
@@ -31,6 +45,13 @@ export enum UserActionTypes {
     USER_LOGIN_LOADING = 'USER_LOGIN_LOADING',
     USER_LOGIN_ERROR = 'USER_LOGIN_ERROR',
     USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS',
+
+    USER_SET_EMAIL = 'USER_SET_EMAIL',
+    USER_SET_NICKNAME = 'USER_SET_NICKNAME',
+    USER_SET_IS_LOGIN= 'USER_SET_IS_LOGIN',
+    USER_SET_IS_LOGOUT= 'USER_SET_IS_LOGOUT',
+    USER_SET_IS_ONLINE = 'USER_SET_IS_ONLINE',
+    USER_SET_DATA = 'USER_SET_DATA',
 
     USER_EMAIL_CHECK_LOADING = 'USER_EMAIL_CHECK_LOADING',
     USER_EMAIL_CHECK_SUCCESS = 'USER_EMAIL_CHECK_SUCCESS',
@@ -71,8 +92,38 @@ interface UserLoginErrorAction {
 
 interface UserLoginSuccessAction {
     type: UserActionTypes.USER_LOGIN_SUCCESS
+}
+
+// setUserEmail/Login/Status
+
+interface UserSetIsLoginAction {
+    type: UserActionTypes.USER_SET_IS_LOGIN
+}
+
+interface UserSetIsLogoutAction {
+    type: UserActionTypes.USER_SET_IS_LOGOUT
+}
+
+interface UserSetIsOnlineAction {
+    type: UserActionTypes.USER_SET_IS_ONLINE
+}
+
+interface UserSetDataAction {
+    type: UserActionTypes.USER_SET_DATA,
+    payload: any
+}
+
+
+interface UserSetEmailAction {
+    type: UserActionTypes.USER_SET_EMAIL
     payload: string
 }
+
+interface UserSetNicknameAction {
+    type: UserActionTypes.USER_SET_NICKNAME
+    payload: string
+}
+
 
 // emailCheck
 
@@ -127,5 +178,11 @@ export type UserAction =
     UserNicknameCheckLoadingAction |
     UserNicknameCheckErrorAction |
     UserNicknameCheckSuccessAction |
-    UserResetStateAction 
+    UserResetStateAction |
+    UserSetEmailAction |
+    UserSetNicknameAction |
+    UserSetIsLogoutAction |
+    UserSetIsLoginAction |
+    UserSetIsOnlineAction |
+    UserSetDataAction
     

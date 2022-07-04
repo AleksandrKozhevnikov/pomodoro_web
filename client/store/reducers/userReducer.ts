@@ -1,6 +1,17 @@
-import {UserAction, UserActionTypes, UserState} from '../../types/user'
+import {UserAction, UserActionTypes, UserState, UserData} from '../../types/user'
 
-const initialState = {
+
+const initialUserData: UserData = {
+    id: 0,
+    email: '',
+    nickname: '',
+    banned: false,
+    banReason: '',
+    open: false,
+    level: 1,
+    totalPoints: 0
+}
+const initialState: UserState = {
     isLogin: false,
     userEmail: '',
     userNick: '',
@@ -11,7 +22,7 @@ const initialState = {
     emailCheckError: '',
     nicknameCheckLoading: false,
     nicknameCheckError: '',
-    token: ''
+    userData: initialUserData
 }
 
 
@@ -26,13 +37,25 @@ export const userReducer = (state = initialState, action: UserAction): UserState
         case UserActionTypes.USER_REGISTRATION_SUCCESS:
                 return {...state, loading: false, success: true}
 
-        //userLogin
+        // userLogin
         case UserActionTypes.USER_LOGIN_LOADING:
                 return {...state, loading: true}
         case UserActionTypes.USER_LOGIN_ERROR:
                 return {...state, error: action.payload}
         case UserActionTypes.USER_LOGIN_SUCCESS:
-                return {...state, loading: false, success: true, token: action.payload}
+                return {...state, loading: false, success: true}
+
+        // setUserData
+        case UserActionTypes.USER_SET_IS_LOGIN:
+                return {...state, isLogin: true}
+        case UserActionTypes.USER_SET_IS_LOGOUT:
+                return {...state, isLogin: false, userEmail: '', userNick: ''}
+        case UserActionTypes.USER_SET_EMAIL:
+                return {...state, userEmail: action.payload}
+        case UserActionTypes.USER_SET_NICKNAME:
+                return {...state, userNick: action.payload}
+        case UserActionTypes.USER_SET_DATA:
+                return {...state, userData: action.payload}
 
         // emailCheck
         case UserActionTypes.USER_EMAIL_CHECK_LOADING:
@@ -52,7 +75,7 @@ export const userReducer = (state = initialState, action: UserAction): UserState
 
         // resetState
         case UserActionTypes.RESET_AUTH_STATE:
-                return {...initialState, token: state.token}
+                return {...initialState}
         default: return state
     }
 }

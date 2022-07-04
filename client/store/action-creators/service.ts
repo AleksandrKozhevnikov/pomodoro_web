@@ -14,6 +14,32 @@ export const openModal = () => {
     }
 }
 
+export const openSettings = () => {
+    return (dispatch: Dispatch<ServiceAction>) => {
+        dispatch({type: ServiceActionTypes.OPEN_SETTINGS})
+    }
+}
+
+export const closeSettings = () => {
+    return (dispatch: Dispatch<ServiceAction>) => {
+        dispatch({type: ServiceActionTypes.CLOSE_SETTINGS})
+    }
+}
+
+export const openStatistic = () => {
+    return (dispatch: Dispatch<ServiceAction>) => {
+        dispatch({type: ServiceActionTypes.OPEN_STATISTIC})
+    }
+}
+
+export const closeStatistic = () => {
+    return (dispatch: Dispatch<ServiceAction>) => {
+        dispatch({type: ServiceActionTypes.CLOSE_STATISTIC})
+    }
+}
+
+
+
 
 
 

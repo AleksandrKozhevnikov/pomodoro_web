@@ -125,9 +125,6 @@ export const RegistrationModal: React.FC = () => {
         }
     }
 
-    console.log(regFormValues.email, regFormValues.nickname, regFormValues.password)
-    console.log(!emailCheckError.length , !emailCheckLoading , !nicknameCheckError , !nicknameCheckLoading)
-
     return (
         <ModalWrapper>
             <ModalHeader>

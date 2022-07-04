@@ -42,12 +42,44 @@ export class UsersController {
         return this.userService.getUserByNickName(name)
     }
 
+    @ApiOperation({summary: 'Изменение статуса видимости пользователя'})
+    @ApiResponse({status: 200, type: [User]})
+    @UseGuards(JwtAuthGuard)
+    @Get('/changeVisibility/:id')
+    changeVisibility(@Param('id') id: number) {
+        return this.userService.changeVisibility(id)
+    }
+
     @ApiOperation({summary: 'Изменение суммарного количества очков пользователя'})
     @ApiResponse({status: 200, type: [User]})
-  /*   @UseGuards(JwtAuthGuard) */
+    @UseGuards(JwtAuthGuard)
     @Post('addPoints')
     changeTotalPoints(@Body() {id, points}) {
         return this.userService.changeTotalPoints(id, points)
+    }
+
+    @ApiOperation({summary: 'Изменение суммарного количества запусков пользователя'})
+    @ApiResponse({status: 200, type: [User]})
+    @UseGuards(JwtAuthGuard)
+    @Post('addTotalStarts')
+    changeTotalStarts(@Body() {id}) {
+        return this.userService.changeTotalStarts(id)
+    }
+
+    @ApiOperation({summary: 'Изменение суммарного количества минут концентрации'})
+    @ApiResponse({status: 200, type: [User]})
+    @UseGuards(JwtAuthGuard)
+    @Post('addTotalConcentration')
+    changeTotalConcentration(@Body() {id, minutes}) {
+        return this.userService.changeTotalConcentration(id, minutes)
+    }
+
+    @ApiOperation({summary: 'Изменение суммарного количества минут концентрации'})
+    @ApiResponse({status: 200, type: [User]})
+    @UseGuards(JwtAuthGuard)
+    @Post('addDayConcentration')
+    changeDayConcentration(@Body() {id, minutesAndDay}) {
+        return this.userService.changeDayConcentration(id, minutesAndDay)
     }
 }
 

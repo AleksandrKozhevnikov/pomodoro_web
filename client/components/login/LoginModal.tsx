@@ -10,7 +10,7 @@ import {WARNING_COLOR} from '../../utils/colors'
 export const LoginModal: React.FC = () => {
 
     const {closeModal, resetAuthState, userLogin} = useActions()
-    const {loading, error, success, token} = useTypedSelector(state => state.user)
+    const {loading, error, success} = useTypedSelector(state => state.user)
 
     const [loginFormValid, setLoginFormValid] = useState(true)
     const [loginFormValues, setLoginFormValues] = useState({email: '', password: ''})
@@ -21,21 +21,21 @@ export const LoginModal: React.FC = () => {
     const [loginFormMessages, setLoginFormMessages] = useState({email: ''})
 
     const resetLoginForm = () => {
+        setLoginFormValues({email: '', password: ''})
         resetAuthState()
-        closeModal()
     }
-
-    console.log(token)
 
     useEffect(() => {
         if(loading) {
             setLoginFormValid(false)
         }
         if(success) {
-            setTimeout(() => resetLoginForm(), 2000)
+            setTimeout(() => closeModal(), 2000)
+            setTimeout(() => resetLoginForm(), 3000)
         }
         if(error) {
-            setTimeout(() => resetLoginForm(), 5000)
+            setTimeout(() => resetLoginForm(), 2000)
+            setTimeout(() => setLoginFormValid(true), 2000)
         }
     }, [success, loading, error])
 
@@ -54,10 +54,10 @@ export const LoginModal: React.FC = () => {
     }
 
     const onChangeEmailHandler = (input: string) => {
+        setLoginFormValues({...loginFormValues, email: input})
         if(input.length > 1) {
             setLoginFormWarnings({...loginFormWarnings, email: true})
             setTimeout(() => checkEmailValid(input), 1500)
-            setLoginFormValues({...loginFormValues, email: input})
         } else {
             setLoginFormWarnings({...loginFormWarnings, email: true})
             setLoginFormValuesValid({...loginFormValuesValid, email: false})
@@ -69,7 +69,6 @@ export const LoginModal: React.FC = () => {
             userLogin({email: loginFormValues.email, password: loginFormValues.password})
         } else {
             setLoginFormValid(false)
-            setTimeout(() => setLoginFormValid(true), 2000)
         }
     }
 
@@ -85,6 +84,7 @@ export const LoginModal: React.FC = () => {
                 <Input
                     placeholder='Email'
                     type='email'
+                    value={loginFormValues.email}
                     onChange={e => onChangeEmailHandler(e.target.value)}
                     style={!loginFormValuesValid.email ? {border: `1px solid ${WARNING_COLOR}`, boxShadow: 'none'} : {}}
                     onBlur={() => setLoginFormWarnings({...loginFormWarnings, email: false})}
@@ -106,6 +106,7 @@ export const LoginModal: React.FC = () => {
                 <Input
                     placeholder='Пароль'
                     type='password'
+                    value={loginFormValues.password}
                     onChange={e => setLoginFormValues({...loginFormValues, password: e.target.value})}
                 />
             </LoginForm>
@@ -114,7 +115,7 @@ export const LoginModal: React.FC = () => {
                 onClick={sendLoginData}
             >
                 {(!loginFormValid && !loading && !error && !success) && <InputWarningMessage style={{color: '#fff'}}>Заполните все поля</InputWarningMessage>}
-                {success && <InputWarningMessage style={{color: '#fff'}}>Это окно закроется автоматически</InputWarningMessage>}
+                {success && <InputWarningMessage style={{color: '#fff'}}>Вход...</InputWarningMessage>}
                 {(!loading && !error && !success) && <div>ok</div>}
                 {error && <div>Неверный логин или пароль</div>}
 
@@ -122,7 +123,6 @@ export const LoginModal: React.FC = () => {
                                     <div className='cssload-whirlpool'></div>
                                 </SpinnerWrapper>}
                 </FormButton>
-              
         </ModalWrapper>
     )
 }

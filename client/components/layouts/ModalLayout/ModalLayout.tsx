@@ -24,7 +24,7 @@ export const ModalLayout: React.FC = ({children}) => {
             setTimeout(() => {
                 router.push('/')
             }, 320)
-        }
+        } 
         openModal()
     }, [modal])
 

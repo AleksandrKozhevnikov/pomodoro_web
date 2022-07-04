@@ -1,5 +1,5 @@
 
-import { HeaderButton, HeaderWrapper, UserWrapper } from "./HeaderStyles"
+import { HeaderDivider, HeaderButton, HeaderWrapper, UserNickname, UserWrapper, UserLevel } from "./HeaderStyles"
 import Link from 'next/link'
 import { useActions } from "../../hooks/useActions"
 import { useRouter } from "next/dist/client/router"
@@ -9,9 +9,10 @@ import { useTypedSelector } from "../../hooks/useTypedSelector"
 
 export const Header: React.FC = () => {
 
-    const {closeModal} = useActions()
-    const {token} = useTypedSelector(state => state.user)
+    const {closeModal, openStatistic, openSettings} = useActions()
+    const {userNick, isLogin} = useTypedSelector(state => state.user)
 
+    
     const router = useRouter()
 
     return (
@@ -20,37 +21,52 @@ export const Header: React.FC = () => {
                 Pomodoro Web
             </HeaderButton>
             <UserWrapper>
-                {router.pathname === REGISTRATION_ROUTE &&
-                    <Link passHref href={LOGIN_ROUTE}>
-                        <HeaderButton>
-                            Вход
-                        </HeaderButton>
-                    </Link>
-                }
-                {router.pathname === LOGIN_ROUTE &&
-                    <Link passHref href={REGISTRATION_ROUTE}>
-                        <HeaderButton>
-                            Регистрация
-                        </HeaderButton>
-                    </Link>
-                }
-
-                {router.pathname === MAIN_ROUTE && 
+                {isLogin ? 
                     <>
-                        <Link passHref href={REGISTRATION_ROUTE}>
-                            <HeaderButton>
-                                Регистрация
-                            </HeaderButton>
-                        </Link>
+                      {/*   <UserLevel>Уровень {userData.level}</UserLevel>
+                        <HeaderDivider/> */}
+                        <UserNickname>{userNick}</UserNickname>
+                        <HeaderDivider/>
+                        <HeaderButton onClick={openStatistic} >
+                            Статистика
+                        </HeaderButton>
+                        <HeaderButton onClick={openSettings}>
+                            Настройки
+                        </HeaderButton>
+                    </>
+                :
+                    <>
+                        {router.pathname === REGISTRATION_ROUTE &&
+                            <Link passHref href={LOGIN_ROUTE}>
+                                <HeaderButton>
+                                    Вход
+                                </HeaderButton>
+                            </Link>
+                        }
+                        {router.pathname === LOGIN_ROUTE &&
+                            <Link passHref href={REGISTRATION_ROUTE}>
+                                <HeaderButton>
+                                    Регистрация
+                                </HeaderButton>
+                            </Link>
+                        }
+                        {router.pathname === MAIN_ROUTE && 
+                            <>
+                                <Link passHref href={REGISTRATION_ROUTE}>
+                                    <HeaderButton>
+                                        Регистрация
+                                    </HeaderButton>
+                                </Link>
 
-                        <Link passHref href={LOGIN_ROUTE}>
-                            <HeaderButton>
-                                Вход
-                            </HeaderButton>
-                        </Link>
+                                <Link passHref href={LOGIN_ROUTE}>
+                                    <HeaderButton>
+                                        Вход
+                                    </HeaderButton>
+                                </Link>
+                            </>
+                        }
                     </>
                 }
-               
             </UserWrapper>
         </HeaderWrapper>
     )
