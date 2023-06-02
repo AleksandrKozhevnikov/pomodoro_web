@@ -52,9 +52,12 @@ export class UsersService {
     }
 
     async changeDayConcentration(id: number, concentrationDayAndMinutes: string) {
-        const userDayConcentration = await this.userRepository.findOne({where: {id}})
-        const user = await this.userRepository.update({dayConcentration: userDayConcentration.dayConcentration + concentrationDayAndMinutes}, {where: {id}})
-        return userDayConcentration
+        const {nickName, dayConcentration} = await this.userRepository.findOne({where: {id}}) as any
+        console.log(nickName, dayConcentration)
+        const userNewDayConcentration = [dayConcentration, concentrationDayAndMinutes] as never
+        const user = await this.userRepository.update({dayConcentration: userNewDayConcentration}, {where: {id}})
+
+        return {nickName, dayConcentration}
     }
 
     async changeTotalPoints(id: number, points: number) {

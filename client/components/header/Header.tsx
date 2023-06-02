@@ -5,6 +5,8 @@ import { useActions } from "../../hooks/useActions"
 import { useRouter } from "next/dist/client/router"
 import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from "../../utils/routes"
 import { useTypedSelector } from "../../hooks/useTypedSelector"
+import {Button, Toolbar, IconButton, Typography, Box, AppBar } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 
 export const Header: React.FC = () => {
@@ -16,58 +18,69 @@ export const Header: React.FC = () => {
     const router = useRouter()
 
     return (
-        <HeaderWrapper>
-            <HeaderButton property={'400'} onClick={() => closeModal()} >
-                Pomodoro Web
-            </HeaderButton>
-            <UserWrapper>
-                {isLogin ? 
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        Pomodoro Fuck
+                    </Typography>
+                    {isLogin ? 
                     <>
                       {/*   <UserLevel>Уровень {userData.level}</UserLevel>
                         <HeaderDivider/> */}
                         <UserNickname>{userNick}</UserNickname>
                         <HeaderDivider/>
-                        <HeaderButton onClick={openStatistic} >
+                        <Button color="inherit" onClick={openStatistic} >
                             Статистика
-                        </HeaderButton>
-                        <HeaderButton onClick={openSettings}>
+                        </Button>
+                        <Button color="inherit" onClick={openSettings}>
                             Настройки
-                        </HeaderButton>
+                        </Button>
                     </>
                 :
                     <>
                         {router.pathname === REGISTRATION_ROUTE &&
                             <Link passHref href={LOGIN_ROUTE}>
-                                <HeaderButton>
+                                <Button color="secondary">
                                     Вход
-                                </HeaderButton>
+                                </Button>
                             </Link>
                         }
                         {router.pathname === LOGIN_ROUTE &&
                             <Link passHref href={REGISTRATION_ROUTE}>
-                                <HeaderButton>
+                                <Button color="primary">
                                     Регистрация
-                                </HeaderButton>
+                                </Button>
                             </Link>
                         }
                         {router.pathname === MAIN_ROUTE && 
                             <>
                                 <Link passHref href={REGISTRATION_ROUTE}>
-                                    <HeaderButton>
+                                    <Button color="inherit">
                                         Регистрация
-                                    </HeaderButton>
+                                    </Button>
                                 </Link>
 
                                 <Link passHref href={LOGIN_ROUTE}>
-                                    <HeaderButton>
+                                    <Button color="secondary">
                                         Вход
-                                    </HeaderButton>
+                                    </Button>
                                 </Link>
                             </>
                         }
                     </>
                 }
-            </UserWrapper>
-        </HeaderWrapper>
+                </Toolbar>
+            </AppBar>
+        </Box>
     )
 }

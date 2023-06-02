@@ -36,6 +36,21 @@ export const StatisticMenu: React.FC = () => {
                 <StatisticInfoDescr>Всего очков</StatisticInfoDescr>
                 <StatisticInfoValue>{userData.totalPoints}</StatisticInfoValue>
             </StatisticInfoWrapper>
+
+            <StatisticInfoWrapper>
+                <StatisticInfoDescr>Всего запусков</StatisticInfoDescr>
+                <StatisticInfoValue>{userData.totalStarts}</StatisticInfoValue>
+            </StatisticInfoWrapper>
+
+            <StatisticInfoWrapper>
+                <StatisticInfoDescr>Всего времени в концентрации</StatisticInfoDescr>
+                <StatisticInfoValue>{userData.totalConcentration}</StatisticInfoValue>
+            </StatisticInfoWrapper>
+
+            <StatisticInfoWrapper>
+                <StatisticInfoDescr>Концентрация по дням</StatisticInfoDescr>
+                <StatisticInfoValue>{userData.dayConcentration}</StatisticInfoValue>
+            </StatisticInfoWrapper>
             <StatisticsDivider/>
         </StatisticWrapper>
     ) 

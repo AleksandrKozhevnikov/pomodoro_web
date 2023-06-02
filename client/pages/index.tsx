@@ -82,17 +82,19 @@ const Home: NextPage = () => {
 				<title>Pomodoro Web</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
-			<MainWrapper>
-				{isLogin && 
-					<>
-						<div>Игра</div>
-						<MainModalWrapper style={{height: windowHeigth()}}>
-							<SettingsMenu/>
-							<StatisticMenu/>
-						</MainModalWrapper>
-					</>
-				}
-			</MainWrapper>
+
+
+				<MainWrapper>
+					{isLogin && 
+						<>
+							<div>Игра</div>
+							<MainModalWrapper style={{height: windowHeigth()}}>
+								<SettingsMenu/>
+								<StatisticMenu/>
+							</MainModalWrapper>
+						</>
+					}
+				</MainWrapper>
 		</>
 	)
 }

@@ -78,8 +78,8 @@ export class UsersController {
     @ApiResponse({status: 200, type: [User]})
     @UseGuards(JwtAuthGuard)
     @Post('addDayConcentration')
-    changeDayConcentration(@Body() {id, minutesAndDay}) {
-        return this.userService.changeDayConcentration(id, minutesAndDay)
+    changeDayConcentration(@Body() {id, dayAndMinutes}) {
+        return this.userService.changeDayConcentration(id, dayAndMinutes)
     }
 }
 

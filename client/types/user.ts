@@ -19,7 +19,10 @@ export interface UserData {
     banReason: string | null,
     open: boolean,
     level: number,
-    totalPoints: number
+    totalPoints: number,
+    totalStarts: number,
+    totalConcentration: number,
+    dayConcentration: string
 }
 
 

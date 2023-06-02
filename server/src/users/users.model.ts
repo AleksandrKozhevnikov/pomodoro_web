@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { STRING } from "sequelize";
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 interface UserCreationAttributes {
@@ -56,8 +57,8 @@ export class User extends Model<User, UserCreationAttributes> {
     totalConcentration: number
 
     @ApiProperty({example: '10.02.22 | 30', description: 'Концентрация в день'})
-    @Column({type: DataType.STRING, allowNull: true, defaultValue: 0})
-    dayConcentration: string
+    @Column({type: DataType.ARRAY(STRING), allowNull: false, defaultValue: []})
+    dayConcentration: []
 }
 
 
